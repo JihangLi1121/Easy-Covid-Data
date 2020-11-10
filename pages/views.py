@@ -35,8 +35,10 @@ def State(request):
     html = df.to_html()
     html2 = df2.to_html()
     return render(request, 'pages/layout.html', {
-        'html': html, 'html2':html2, 'deathgraph':Deaths_graph(states), 'comfirmgraph':Comfirmed_graph(states)
+        'html': html, 'html2':html2, 'deathgraph':Deaths_graph(states), 
+        'comfirmgraph':Comfirmed_graph(states), 'state':states
     })
+    
 def Deaths_graph(states):
     #death graph
     deathgraph = state_deaths.Death_graphs(states)

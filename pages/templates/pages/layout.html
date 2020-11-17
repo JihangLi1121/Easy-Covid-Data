@@ -14,8 +14,7 @@
         <script src="/path/to/c3.min.js"></script>
 
         <script> 
-        chart = c3.generate({
-            bindto: '#deathChart',
+        let chart = c3.generate({
             data: {
               columns: [
                 ['data1', 30, 200, 100, 400, 150, 250],
@@ -25,9 +24,9 @@
         });
         </script>
 
-        <h2>{{ state }} Covid data </h2>
-        <div id="deathChart" style="float: left;margin-bottom: auto;margin-left: auto;margin-right: auto;"> 
-            chart </div>
+        <h2>{{ state }} Covid Data </h2>
+        <div style="float: left;margin-bottom: auto;margin-left: auto;margin-right: auto;"> 
+            {{ chart }}</div>
         <div style="float: right;margin-bottom: 50px;margin-left: 10px;margin-right: 200px;">
             </div>
         <div style="float: left;margin-left: auto;margin-right: auto;"> {{ html | safe }} </div>   

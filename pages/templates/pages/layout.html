@@ -13,7 +13,8 @@
         <script src="/path/to/d3.v5.min.js" charset="utf-8"></script>
         <script src="/path/to/c3.min.js"></script>
 
-        <script> chart = c3.generate({
+        <script> 
+        chart = c3.generate({
             bindto: '#deathChart',
             data: {
               columns: [
@@ -21,14 +22,15 @@
                 ['data2', 50, 20, 10, 40, 15, 25]
               ]
             }
-        });</script>
+        });
+        </script>
 
         <h2>{{ state }} Covid data </h2>
-        <div id="deathChart" style="float: left;margin-bottom: 50px;margin-left: 200px;margin-right: 10px;"> 
-            </div>
+        <div id="deathChart" style="float: left;margin-bottom: auto;margin-left: auto;margin-right: auto;"> 
+            chart </div>
         <div style="float: right;margin-bottom: 50px;margin-left: 10px;margin-right: 200px;">
             </div>
-        <div style="float: left;margin-left: 150px;margin-right: 10px;"> {{ html | safe }} </div>   
-        <div style="float: right;margin-left: 10px;margin-right: 150px;">{{ html2 | safe }} </div>
+        <div style="float: left;margin-left: auto;margin-right: auto;"> {{ html | safe }} </div>   
+        <div style="float: right;margin-left: auto;margin-right: auto;">{{ html2 | safe }} </div>
     </body>
 </html>

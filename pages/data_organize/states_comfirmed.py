@@ -87,11 +87,11 @@ def Comfirmed_graphs(state):
         total1 = total1 + df.loc[i, rightnow]
 
     column1 = 'Comfirm per day in ' + f'{state}'
-    d1 = {'Date':[fiveday, fourday, threeday, twoday, rightnow], column1:[total5, total4, total3, total2, total1]}
-    dataset2 = pd.DataFrame(data=d1)
+    d1 = [fiveday, fourday, threeday, twoday, rightnow]
+    d2 = [total5, total4, total3, total2, total1]
 
-    plot2 = plt.plot(dataset)
-    plot2.ylabel(column1)
+    plot2 = plt.plot(d1,d2)
+    plot2.ylabel(column)
     plot2.xlabel('Date')  
     plothtml2 = mpld3.fig_to_html(plot2)
     return plothtml2

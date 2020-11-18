@@ -87,10 +87,10 @@ def Death_graphs(state):
         total1 = total1 + df.loc[i, rightnow]
     
     column = 'Death per day in ' + f'{state}'
-    d = {'Date':[fiveday, fourday, threeday, twoday, rightnow], column:[total5, total4, total3, total2, total1]}
-    dataset = pd.DataFrame(data=d)
+    d1 = [fiveday, fourday, threeday, twoday, rightnow]
+    d2 = [total5, total4, total3, total2, total1]
 
-    plot = plt.plot(dataset)
+    plot = plt.plot(d1,d2)
     plot.ylabel(column)
     plot.xlabel('Date')  
     plothtml1 = mpld3.fig_to_html(plot)

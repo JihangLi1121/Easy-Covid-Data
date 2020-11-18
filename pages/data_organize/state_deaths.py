@@ -91,8 +91,8 @@ def Death_graphs(state):
     d2 = [total5, total4, total3, total2, total1]
 
     plot = plt.plot(d1,d2)
-    plot.ylabel(column)
-    plot.xlabel('Date')  
+    plt.ylabel(column)
+    plt.xlabel('Date')  
     plothtml1 = mpld3.fig_to_html(plot)
     return plothtml1 
     

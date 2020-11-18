@@ -91,7 +91,7 @@ def Comfirmed_graphs(state):
     d2 = [total5, total4, total3, total2, total1]
 
     plot2 = plt.plot(d1,d2)
-    plot2.ylabel(column)
-    plot2.xlabel('Date')  
+    plt.ylabel(column)
+    plt.xlabel('Date')  
     plothtml2 = mpld3.fig_to_html(plot2)
     return plothtml2

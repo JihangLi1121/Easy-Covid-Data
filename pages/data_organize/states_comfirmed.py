@@ -4,6 +4,7 @@ import datetime
 import pytz
 import seaborn as sns
 import mpld3
+import matplotlib.pyplot as plt 
 
 def States(state):
     df = comfirm.load_df()
@@ -89,6 +90,8 @@ def Comfirmed_graphs(state):
     d1 = {'Date':[fiveday, fourday, threeday, twoday, rightnow], column1:[total5, total4, total3, total2, total1]}
     dataset2 = pd.DataFrame(data=d1)
 
-    plot2 = sns.lineplot(data=dataset2, x='Date', y=column1)
+    plot2 = plt.plot(dataset)
+    plot2.ylabel(column1)
+    plot2.xlabel('Date')  
     plothtml2 = mpld3.fig_to_html(plot2)
     return plothtml2

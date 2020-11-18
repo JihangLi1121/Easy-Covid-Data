@@ -4,6 +4,7 @@ import datetime
 import pytz
 import seaborn as sns
 import mpld3
+import matplotlib.pyplot as plt
 
 def States(state):
     df = deaths.load_df()
@@ -89,7 +90,9 @@ def Death_graphs(state):
     d = {'Date':[fiveday, fourday, threeday, twoday, rightnow], column:[total5, total4, total3, total2, total1]}
     dataset = pd.DataFrame(data=d)
 
-    plot = sns.lineplot(data=dataset, x='Date', y=column)
+    plot = plt.plot(dataset)
+    plot.ylabel(column)
+    plot.xlabel('Date')  
     plothtml1 = mpld3.fig_to_html(plot)
     return plothtml1 
     

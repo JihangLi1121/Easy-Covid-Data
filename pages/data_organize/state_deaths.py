@@ -90,10 +90,11 @@ def Death_graphs(state):
     d1 = [fiveday, fourday, threeday, twoday, rightnow]
     d2 = [total5, total4, total3, total2, total1]
 
-    plot = plt.plot(d1,d2)
-    plt.ylabel(column)
-    plt.xlabel('Date')  
-    plothtml1 = mpld3.fig_to_html(plot)
+    fig, ax = plt.subplot()
+    ax.plot(d1, d2)
+    ax.xlabel('Date')  
+    ax.ylabel(column)
+    plothtml1 = mpld3.fig_to_html(fig)
     return plothtml1 
     
     

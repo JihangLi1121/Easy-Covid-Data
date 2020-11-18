@@ -90,8 +90,9 @@ def Comfirmed_graphs(state):
     d1 = [fiveday, fourday, threeday, twoday, rightnow]
     d2 = [total5, total4, total3, total2, total1]
 
-    plot2 = plt.plot(d1,d2)
-    plt.ylabel(column)
-    plt.xlabel('Date')  
-    plothtml2 = mpld3.fig_to_html(plot2)
+    fig, ax = plt.subplot()
+    ax.plot(d1, d2)
+    ax.ylabel(column)
+    ax.xlabel('Date')  
+    plothtml2 = mpld3.fig_to_html(fig)
     return plothtml2

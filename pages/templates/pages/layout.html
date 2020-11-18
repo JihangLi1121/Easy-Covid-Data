@@ -8,9 +8,9 @@
     <body>
         <h2>{{ state }} Covid Data </h2>
         <div style="float: left;margin-bottom: auto;margin-left: auto;margin-right: auto;"> 
-            {{ Deathfig }}</div>
+            {{ Deathfig | safe}}</div>
         <div style="float: right;margin-bottom: auto;margin-left: auto;margin-right: auto;">
-            {{ Comfirmfig }}</div>
+            {{ Comfirmfig | safe}}</div>
         <div style="margin-left: auto;margin-right: auto;"> {{ html | safe }} </div>   
         <div style="margin-left: auto;margin-right: auto;">{{ html2 | safe }} </div>
     </body>

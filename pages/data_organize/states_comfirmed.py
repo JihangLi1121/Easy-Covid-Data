@@ -3,15 +3,7 @@ import pandas as pd
 import datetime
 import pytz
 import seaborn as sns
-import io
-import base64
-
-def Comfirm_fig_to_base64(fig):
-    img = io.BytesIO()
-    fig.savefig(img, format='png',
-                bbox_inches='tight')
-    img.seek(0)
-    return base64.b64encode(img.getvalue())
+import mpld3
 
 def States(state):
     df = comfirm.load_df()
@@ -98,4 +90,5 @@ def Comfirmed_graphs(state):
     dataset2 = pd.DataFrame(data=d1)
 
     plot2 = sns.lineplot(data=dataset2, x='Date', y=column1)
-    return plot2.get_figure()
+    plothtml2 = mpld3.fig_to_html(plot2)
+    return plothtml2

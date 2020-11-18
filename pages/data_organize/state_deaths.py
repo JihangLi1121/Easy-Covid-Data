@@ -3,15 +3,7 @@ import pandas as pd
 import datetime
 import pytz
 import seaborn as sns
-import io
-import base64
-
-def Death_fig_to_base64(fig):
-    img = io.BytesIO()
-    fig.savefig(img, format='png',
-                bbox_inches='tight')
-    img.seek(0)
-    return base64.b64encode(img.getvalue())
+import mpld3
 
 def States(state):
     df = deaths.load_df()
@@ -98,7 +90,8 @@ def Death_graphs(state):
     dataset = pd.DataFrame(data=d)
 
     plot = sns.lineplot(data=dataset, x='Date', y=column)
-    return plot.get_figure()
+    plothtml1 = mpld3.fig_to_html(plot)
+    return plothtml1 
     
     
     

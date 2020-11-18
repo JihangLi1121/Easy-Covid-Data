@@ -34,21 +34,22 @@ def State(request):
     #tables
     html = df.to_html()
     html2 = df2.to_html()
+    fig = state_deaths.Death_graphs(states)
+    fig2 = states_comfirmed.Comfirmed_graphs(states)
     return render(request, 'pages/layout.html', {
-        'html': html, 'html2':html2, 'deathgraph':Deaths_graph(states), 
-        'comfirmgraph':Comfirmed_graph(states), 'state':states
+        'html': html, 'html2':html2,'state':states, 'Deathfig':fig, 'Comfirmfig':fig2
     })
     
-def Deaths_graph(states):
+#def Deaths_graph(states):
     #death graph
-    deathgraph = state_deaths.Death_graphs(states)
-    encoded1 = state_deaths.Death_fig_to_base64(deathgraph)
-    my_html1 = "data:deathgraph/png;base64, {}".format(encoded1.decode('utf-8'))
-    return my_html1
+    #deathgraph = state_deaths.Death_graphs(states)
+    #encoded1 = state_deaths.Death_fig_to_base64(deathgraph)
+    #my_html1 = "data:deathgraph/png;base64, {}".format(encoded1.decode('utf-8'))
+    #return my_html1
 
-def Comfirmed_graph(states):
+#def Comfirmed_graph(states):
     #comfirm graph
-    comfirmgraph = states_comfirmed.Comfirmed_graphs(states)
-    encoded2 = states_comfirmed.Comfirm_fig_to_base64(comfirmgraph)
-    my_html2 = "data:comfirmgraph/png;base64, {}".format(encoded2.decode('utf-8'))
-    return my_html2
+    #comfirmgraph = states_comfirmed.Comfirmed_graphs(states)
+    #encoded2 = states_comfirmed.Comfirm_fig_to_base64(comfirmgraph)
+    #my_html2 = "data:comfirmgraph/png;base64, {}".format(encoded2.decode('utf-8'))
+    #return my_html2

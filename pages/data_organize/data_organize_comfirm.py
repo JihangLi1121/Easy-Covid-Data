@@ -2,7 +2,7 @@ import pandas as pd
 from .data_organize_deaths import get_population
 from .data_organize_deaths import get_time
 from . import data_organize_deaths as deaths
-import datetime
+from datetime import timedelta
 import pytz
 
 def get_states(state, df):
@@ -26,16 +26,15 @@ def organize_df(df):
     
     series = pd.Series(dtype=float)
 
-    time = get_time()
+    today = get_time()
 
     for i in range(len(df.index)):
         try: 
-            total_deaths = df.loc[i,time]
+            total_deaths = df.loc[i,today.strftime("%m/%d/%y")]
         except KeyError:
-            pacific = pytz.timezone('US/Pacific')
-            now = datetime.datetime.now(tz=pacific)
-            time = time = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}'
-            total_deaths = df.loc[i,time]
+            yesterday = today - timedelta(days=1)
+            yesterday = yesterday.strftime("%m/%d/%y")
+            total_deaths = df.loc[i,yesterday]
         f = pd.Series([((total_deaths/df.loc[i,'Population']) * 100).__round__(4)])
         series = series.append(f, ignore_index=True)
 

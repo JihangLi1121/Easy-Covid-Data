@@ -1,33 +1,30 @@
 from . import data_organize_comfirm as comfirm
 import pandas as pd
-import datetime
-import pytz
-import seaborn as sns
 import mpld3
 import matplotlib.pyplot as plt 
+from datetime import timedelta
 
 def States(state):
     df = comfirm.load_df()
     df = comfirm.organize_df(df)
     df = comfirm.get_states(state, df) 
-    pacific = pytz.timezone('US/Pacific')
-    now = datetime.datetime.now(tz=pacific)
     rightnow = comfirm.get_time()
     try: 
-        day = df.loc[:,rightnow]
+        day = df.loc[:,rightnow.strftime("%m/%d/%y")]
     except KeyError:
-        extra_day = f'{now.month}' + '/' + f'{now.day-6}' + '/' + f'{str(now.year)[2:]}' 
-        fiveday = f'{now.month}' + '/' + f'{now.day-5}' + '/' + f'{str(now.year)[2:]}' 
-        fourday = f'{now.month}' + '/' + f'{now.day-4}' + '/' + f'{str(now.year)[2:]}' 
-        threeday = f'{now.month}' + '/' + f'{now.day-3}' + '/' + f'{str(now.year)[2:]}' 
-        twoday = f'{now.month}' + '/' + f'{now.day-2}' + '/' + f'{str(now.year)[2:]}' 
-        rightnow = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}' 
+        extra_day = (rightnow - timedelta(days=6)).strftime("%m/%d/%y")
+        fiveday = (rightnow - timedelta(days=5)).strftime("%m/%d/%y")
+        fourday = (rightnow - timedelta(days=4)).strftime("%m/%d/%y")
+        threeday = (rightnow - timedelta(days=3)).strftime("%m/%d/%y")
+        twoday = (rightnow - timedelta(days=2)).strftime("%m/%d/%y")
+        rightnow = (rightnow - timedelta(days=1)).strftime("%m/%d/%y")
     else:
-        extra_day = f'{now.month}' + '/' + f'{now.day-5}' + '/' + f'{str(now.year)[2:]}' 
-        fiveday = f'{now.month}' + '/' + f'{now.day-4}' + '/' + f'{str(now.year)[2:]}' 
-        fourday = f'{now.month}' + '/' + f'{now.day-3}' + '/' + f'{str(now.year)[2:]}' 
-        threeday = f'{now.month}' + '/' + f'{now.day-2}' + '/' + f'{str(now.year)[2:]}' 
-        twoday = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}' 
+        extra_day = (rightnow - timedelta(days=5)).strftime("%m/%d/%y")
+        fiveday = (rightnow - timedelta(days=4)).strftime("%m/%d/%y")
+        fourday = (rightnow - timedelta(days=3)).strftime("%m/%d/%y")
+        threeday = (rightnow - timedelta(days=2)).strftime("%m/%d/%y")
+        twoday = (rightnow - timedelta(days=1)).strftime("%m/%d/%y")
+        rightnow = rightnow.strftime("%m/%d/%y")
     five_day = df.loc[:,extra_day:]
     for element in range(0, len(five_day.index-1)):
         extra = five_day.loc[element, extra_day]
@@ -52,26 +49,24 @@ def States(state):
     return df.join(five_day)
 
 def Comfirmed_graphs(state):
-    pacific = pytz.timezone('US/Pacific')
-    now = datetime.datetime.now(tz=pacific)
-    
     df = States(state)
     
     rightnow = comfirm.get_time()
     df = df.loc[:, 'Population':]
     try: 
-        day = df.loc[:,rightnow]
+        day = df.loc[:,rightnow.strftime("%m/%d/%y")]
     except KeyError:
-        fiveday = f'{now.month}' + '/' + f'{now.day-5}' + '/' + f'{str(now.year)[2:]}' 
-        fourday = f'{now.month}' + '/' + f'{now.day-4}' + '/' + f'{str(now.year)[2:]}' 
-        threeday = f'{now.month}' + '/' + f'{now.day-3}' + '/' + f'{str(now.year)[2:]}' 
-        twoday = f'{now.month}' + '/' + f'{now.day-2}' + '/' + f'{str(now.year)[2:]}' 
-        rightnow = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}' 
+        fiveday = (rightnow - timedelta(days=5)).strftime("%m/%d/%y")
+        fourday = (rightnow - timedelta(days=4)).strftime("%m/%d/%y")
+        threeday = (rightnow - timedelta(days=3)).strftime("%m/%d/%y")
+        twoday = (rightnow - timedelta(days=2)).strftime("%m/%d/%y")
+        rightnow = (rightnow - timedelta(days=1)).strftime("%m/%d/%y")
     else:
-        fiveday = f'{now.month}' + '/' + f'{now.day-4}' + '/' + f'{str(now.year)[2:]}' 
-        fourday = f'{now.month}' + '/' + f'{now.day-3}' + '/' + f'{str(now.year)[2:]}' 
-        threeday = f'{now.month}' + '/' + f'{now.day-2}' + '/' + f'{str(now.year)[2:]}' 
-        twoday = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}' 
+        fiveday = (rightnow - timedelta(days=4)).strftime("%m/%d/%y")
+        fourday = (rightnow - timedelta(days=3)).strftime("%m/%d/%y")
+        threeday = (rightnow - timedelta(days=2)).strftime("%m/%d/%y")
+        twoday = (rightnow - timedelta(days=1)).strftime("%m/%d/%y")
+        rightnow = rightnow.strftime("%m/%d/%y")
 
     total5 = 0
     total4 = 0
@@ -96,3 +91,41 @@ def Comfirmed_graphs(state):
     plt.xlabel('Date')  
     plothtml2 = mpld3.fig_to_html(fig)
     return plothtml2
+
+def ComfirmTotal(state):
+    time = comfirm.get_time()
+    timeformat = time.strftime("%m/%d/%y")
+    df = comfirm.load_df()
+    df = comfirm.organize_df(df)
+    df = comfirm.get_states(state, df)
+    total_comfirm = 0
+
+    for i in range(len(df.index)):
+        try: 
+            temp = df.loc[i, timeformat]
+        except KeyError:
+            yesterday = time - timedelta(days=1)
+            yesterday = yesterday.strftime("%m/%d/%y")
+            temp = df.loc[i, yesterday]
+        
+        total_comfirm = total_comfirm + temp
+    return total_comfirm
+    
+def ComfirmNum(state):
+    df = States(state)
+    time = comfirm.get_time()
+    comfirm_num = 0
+
+    for i in range(len(df.index)):
+        try:
+            temp = df.loc[i, time.strftime("%m/%d/%y")]
+        except KeyError:
+            yesterday = time - timedelta(days=1)
+            yesterday = yesterday.strftime("%m/%d/%y")
+            temp = df.loc[i, yesterday]
+
+        comfirm_num = comfirm_num + temp
+    
+    return comfirm_num
+    
+

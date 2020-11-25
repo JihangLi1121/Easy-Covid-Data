@@ -4,11 +4,24 @@
     <title>EasyCovidData</title>
 </head>
 <body>
-    <h3>search</h3>
-    <form action="{% url 'pages:index' %}" method='post'>
+    <form style="float:right;margin: 20px;" action="{% url 'pages:index' %}" method='post'>
         {% csrf_token %}
         {{ form }}
     <input type="submit">
-      
     </form>
+
+    <p><h1>Welcome to EasyCovidData</h1></p>
+    <p style="margin: 10px;text-align: end;">
+        <br>
+        Created by Jihang Li
+        <br>
+        Contact me at ljh20021121@gmail.com
+        <br>
+        Data by John Hopkins University 
+        <br>
+        https://github.com/CSSEGISandData/COVID-19
+    </p>
+
+
+    
 </body>

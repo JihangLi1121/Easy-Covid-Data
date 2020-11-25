@@ -1,4 +1,6 @@
 import pandas as pd
+from datetime import date
+from datetime import timedelta
 import datetime
 import pytz
 
@@ -7,9 +9,8 @@ def get_states(state, df):
 
 def get_time():
     pacific = pytz.timezone('US/Pacific')
-    now = datetime.datetime.now(tz=pacific)
-    time = f'{now.month}' + '/' + f'{now.day}' + '/' + f'{str(now.year)[2:]}'
-    return time
+    today = datetime.datetime.now(pacific)
+    return today
 
 def load_df():
     url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv"
@@ -31,16 +32,15 @@ def organize_df(df):
 
     series = pd.Series(dtype=float)
 
-    time = get_time()
+    today = get_time()
 
     for i in range(len(df.index)):
         try: 
-            total_deaths = df.loc[i,time]
+            total_deaths = df.loc[i,today.strftime("%m/%d/%y")]
         except KeyError:
-            pacific = pytz.timezone('US/Pacific')
-            now = datetime.datetime.now(tz=pacific)
-            time = f'{now.month}' + '/' + f'{now.day-1}' + '/' + f'{str(now.year)[2:]}'
-            total_deaths = df.loc[i,time]
+            yesterday = today - timedelta(days = 1)
+            yesterday = yesterday.strftime("%m/%d/%y")
+            total_deaths = df.loc[i,yesterday]
         f = pd.Series([((total_deaths/df.loc[i,'Population']) * 100).__round__(4)])
         series = series.append(f, ignore_index=True)
 

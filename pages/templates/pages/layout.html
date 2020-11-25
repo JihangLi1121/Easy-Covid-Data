@@ -6,12 +6,40 @@
         </title>
     </head>
     <body>
-        <h2>{{ state }} Covid Data </h2>
-        <div style="float: left;margin: 150px;"> 
-            {{ Deathfig | safe}}</div>
-        <div style="float: right;margin: 150px;">
+        <button id="myButton" style="float: right;font-size: 30px;"> Back to Homepage </button>
+
+        <script type="text/javascript"> 
+            document.getElementById("myButton").onclick = function() {
+                location.href = "{% url 'pages:index' %}";
+            };
+        </script>
+
+        <h1>{{ state }} Covid Data </h1>
+        <p style="float: left;font-size: 30px;">Comfirm: {{ ComfirmTotal }} </p> 
+        <p style="float: left;margin-bottom: 10px;"> (+{{ ComfirmNum }})</p>
+        <p style="float: left;font-size: 30px;margin-left: 50px;"> Death: {{DeathTotal}} </p> 
+        <p style="float: left;margin-bottom: 10px;"> (+{{ DeathNum }})</p>
+
+        <div style="float: right;margin-right: 200px;margin-top: 215px;"> 
             {{ Comfirmfig | safe}}</div>
+        <div style="float: right;margin-bottom: 120px;margin-top: 120px;margin-right: 250px;">
+            {{ Deathfig | safe}}</div>
         <div style="display: inline-block;margin: 80px;"> {{ html | safe }} </div>   
         <div style="display: inline-block;margin: 80px;">{{ html2 | safe }} </div>
+
+        <hr>
+        <p style="display: inline-block;margin: 20px;text-align: start;font-size: 20px;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+            EasyCovidData
+        </p>
+        <p style="float: right;margin: 10px;text-align: end;">
+            <br>
+            Created by Jihang Li
+            <br>
+            Contact me at ljh20021121@gmail.com
+            <br>
+            Data by John Hopkins University 
+            <br>
+            https://github.com/CSSEGISandData/COVID-19
+        </p>
     </body>
 </html>

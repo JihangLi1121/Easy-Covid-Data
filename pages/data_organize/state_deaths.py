@@ -82,10 +82,12 @@ def Death_graphs(state):
         total1 = total1 + df.loc[i, rightnow]
     
     column = 'Death per day in ' + f'{state}'
-    d1 = [fiveday, fourday, threeday, twoday, rightnow]
+    d1 = [str(fiveday), str(fourday), str(threeday), str(twoday), str(rightnow)]
     d2 = [total5, total4, total3, total2, total1]
+    x = [0,1,2,3,4]
 
     fig = plt.figure()
+    plt.xticks(x, d1)
     plt.plot(d1, d2)
     plt.xlabel('Date')  
     plt.ylabel(column)

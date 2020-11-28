@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width">
     <title>EasyCovidData</title>
 </head>
 <body>
@@ -10,23 +11,32 @@
     <input type="submit">
     </form>
 
-    <!-- Map for testing -->
-
-    
-
-    <!-- map for testing ends here-->
-
     <p><h1>Welcome to EasyCovidData</h1></p>
-    <p style="margin: 10px;text-align: end;">
-        <br>
-        Created by Jihang Li
-        <br>
-        Contact me at ljh20021121@gmail.com
-        <br>
-        Data by John Hopkins University 
-        <br>
-        https://github.com/CSSEGISandData/COVID-19
-    </p>
+
+     <!-- Map for testing -->
+
+     <div>
+        <iframe src="https://createaclickablemap.com/map.php?&id=98074&maplocation=false&online=true" style="overflow: hidden; height: 100%;
+        width: 100%; position: absolute;border: black;"></iframe>
+        <script>if (window.addEventListener){ window.addEventListener("message", function(event) { if(event.data.length >= 22) { if( event.data.substr(0, 22) == "__MM-LOCATION.REDIRECT") location = event.data.substr(22); } }, false); } else if (window.attachEvent){ window.attachEvent("message", function(event) { if( event.data.length >= 22) { if ( event.data.substr(0, 22) == "__MM-LOCATION.REDIRECT") location = event.data.substr(22); } }, false); } </script>
+    </div>
+    <!-- map for testing ends here-->
+    <div style="margin-top: 100%;position: relative;">
+        <hr>
+        <p style="display: inline-block;margin: 20px;text-align: start;font-size: 20px;font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        EasyCovidData
+        </p>
+        <p style="margin: 10px;text-align: end;">
+            <br>
+            Created by Jihang Li
+            <br>
+            Contact me at ljh20021121@gmail.com
+            <br>
+            Data by John Hopkins University 
+            <br>
+            https://github.com/CSSEGISandData/COVID-19
+        </p>
+    </div>
 
 
     

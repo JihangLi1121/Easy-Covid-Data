@@ -45,4 +45,5 @@ def State(request):
         'ComfirmTotal': ComfirmTotal, 'DeathTotal': DeathTotal, 'ComfirmNum': ComfirmNum,
         'DeathNum': DeathNum
     })
+
     

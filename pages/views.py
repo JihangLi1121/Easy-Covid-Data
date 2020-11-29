@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .data_organize import state_deaths
 from .data_organize import states_comfirmed
+from datetime import datetime
 
 # Create your views here.
 
@@ -28,22 +29,45 @@ def index(request):
 def State(request):
     if "search" not in request.session:
         request.session["search"] = ''
-    states = str(request.session['search'])
-    df = state_deaths.States(states)
-    df2 = states_comfirmed.States(states)
-    #tables
-    html = df.to_html()
-    html2 = df2.to_html()
-    fig = state_deaths.Death_graphs(states)
-    fig2 = states_comfirmed.Comfirmed_graphs(states)
-    ComfirmTotal = states_comfirmed.ComfirmTotal(states)
-    DeathTotal = state_deaths.DeathTotal(states)
-    ComfirmNum = states_comfirmed.ComfirmNum(states)
-    DeathNum = state_deaths.DeathNum(states)
+    states = str(request.session['search']) # state in string
+    
+    print(f"{datetime.now().time()} Finish Get search result")
+    # get dicts
+    deathDict = state_deaths.States(states)
+    comfirmDict = states_comfirmed.States(states)
+
+    print(f"{datetime.now().time()} Finish get dictionaries")
+    # get tables
+    deathTable = deathDict['deathTable']
+    comfirmTable = comfirmDict['comfirmTable']
+    # turn tables into html
+    deathTable_html = deathTable.to_html()
+    comfirmTable_html = comfirmTable.to_html()
+
+    print(f"{datetime.now().time()} Finish get tables and turn into html")
+    # get graphs 
+    deathfig = deathDict['deathGraph']
+    comfirmfig = comfirmDict['comfirmGraph']
+
+    print(f"{datetime.now().time()} Finish get graphs")
+    # get total numbers 
+    deathTotal = deathDict['deathTotal']
+    comfirmTotal = comfirmDict['comfirmTotal']
+
+    print(f"{datetime.now().time()} Finish get total numbers")
+    # get daily numbers
+    deathNum = deathDict['dailyDeath']
+    comfirmNum = comfirmDict['dailyComfirm']
+
+    print(f"{datetime.now().time()} Finish get daily numbers")
+
     return render(request, 'pages/layout.html', {
-        'html': html, 'html2':html2,'state':states, 'Deathfig':fig, 'Comfirmfig':fig2,
-        'ComfirmTotal': ComfirmTotal, 'DeathTotal': DeathTotal, 'ComfirmNum': ComfirmNum,
-        'DeathNum': DeathNum
+        'DeathTable':deathTable_html, 'ComfirmTable':comfirmTable_html,'state':states, 
+        'Deathfig':deathfig, 'Comfirmfig':comfirmfig, 'DeathTotal':deathTotal, 
+        'ComfirmTotal':comfirmTotal, 'DeathNum':deathNum, 'ComfirmNum':comfirmNum
     })
+
+def render_from_state(state):
+    return 0 
 
     

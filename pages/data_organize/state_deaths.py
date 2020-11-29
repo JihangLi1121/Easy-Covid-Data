@@ -75,7 +75,7 @@ def States(state):
     column = 'Death per day in ' + f'{state}'
     d1 = [str(fiveday), str(fourday), str(threeday), str(twoday), str(today)]
     d2 = [total5, total4, total3, total2, total1]
-    x = [0,1,2,3,4,5]
+    x = [0,1,2,3,4]
     # Create graph 
     fig = plt.figure()
     plt.xlabel('Date')  

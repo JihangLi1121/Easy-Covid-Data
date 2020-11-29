@@ -75,7 +75,7 @@ def States(state):
     column1 = 'Comfirm per day in ' + f'{state}'
     d1 = [str(fiveday), str(fourday), str(threeday), str(twoday), str(today)]
     d2 = [total5, total4, total3, total2, total1]
-    x = [0,1,2,3,4,5]
+    x = [0,1,2,3,4]
     # create graph
     fig = plt.figure()
     plt.ylabel(column1)

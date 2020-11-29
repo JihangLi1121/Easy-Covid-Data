@@ -83,6 +83,7 @@ def States(state):
     plt.xticks(x, d1)
     plt.plot(d1, d2)
     plothtml2 = mpld3.fig_to_html(fig) # return for graph 
+    print(plothtml2)
     # FINISH OF GRAPH
     # ------------------------------------------------------------------------
     # START OF TOTAL NUMBER OF COMFIRMED CASES

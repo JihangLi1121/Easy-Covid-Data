@@ -30,7 +30,7 @@ def State(request):
     if "search" not in request.session:
         request.session["search"] = ''
     states = str(request.session['search']) # state in string
-    
+
     print(f"{datetime.now().time()} Finish Get search result")
     # get dicts
     deathDict = state_deaths.States(states)
@@ -67,7 +67,43 @@ def State(request):
         'ComfirmTotal':comfirmTotal, 'DeathNum':deathNum, 'ComfirmNum':comfirmNum
     })
 
-def render_from_state(state):
-    return 0 
+def render_by_map(request, state):
+    states = state # state in string
+
+    print(f"{datetime.now().time()} Finish Get search result")
+    # get dicts
+    deathDict = state_deaths.States(states)
+    comfirmDict = states_comfirmed.States(states)
+
+    print(f"{datetime.now().time()} Finish get dictionaries")
+    # get tables
+    deathTable = deathDict['deathTable']
+    comfirmTable = comfirmDict['comfirmTable']
+    # turn tables into html
+    deathTable_html = deathTable.to_html()
+    comfirmTable_html = comfirmTable.to_html()
+
+    print(f"{datetime.now().time()} Finish get tables and turn into html")
+    # get graphs 
+    deathfig = deathDict['deathGraph']
+    comfirmfig = comfirmDict['comfirmGraph']
+
+    print(f"{datetime.now().time()} Finish get graphs")
+    # get total numbers 
+    deathTotal = deathDict['deathTotal']
+    comfirmTotal = comfirmDict['comfirmTotal']
+
+    print(f"{datetime.now().time()} Finish get total numbers")
+    # get daily numbers
+    deathNum = deathDict['dailyDeath']
+    comfirmNum = comfirmDict['dailyComfirm']
+
+    print(f"{datetime.now().time()} Finish get daily numbers")
+
+    return render(request, 'pages/layout.html', {
+        'DeathTable':deathTable_html, 'ComfirmTable':comfirmTable_html,'state':states, 
+        'Deathfig':deathfig, 'Comfirmfig':comfirmfig, 'DeathTotal':deathTotal, 
+        'ComfirmTotal':comfirmTotal, 'DeathNum':deathNum, 'ComfirmNum':comfirmNum
+    })
 
     

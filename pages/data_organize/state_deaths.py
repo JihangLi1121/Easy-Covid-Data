@@ -76,12 +76,13 @@ def States(state):
     d1 = [str(fiveday), str(fourday), str(threeday), str(twoday), str(today)]
     d2 = [total5, total4, total3, total2, total1]
     x = [0,1,2,3,4]
+    x1 = ['a','b','c','d','e']
     # Create graph 
     fig = plt.figure()
     plt.xlabel('Date')  
     plt.ylabel(column)
-    plt.xticks(x, d1)
-    plt.plot(d1, d2)
+    plt.xticks(x, x1)
+    plt.plot(x1, d2)
     plothtml1 = mpld3.fig_to_html(fig) # return for graph 
     print(plothtml1)
     # FINISH OF GRAPH

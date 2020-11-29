@@ -2,7 +2,6 @@ from . import data_organize_deaths as deaths
 import pandas as pd
 import mpld3
 import matplotlib.pyplot as plt
-import matplotlib
 from datetime import timedelta
 
 def States(state):

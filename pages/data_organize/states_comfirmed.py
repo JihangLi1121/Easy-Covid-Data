@@ -3,7 +3,6 @@ import pandas as pd
 import mpld3
 import matplotlib.pyplot as plt 
 from datetime import timedelta
-import matplotlib 
 
 def States(state):
     # load and organize dataframe

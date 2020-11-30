@@ -80,8 +80,7 @@ def States(state):
     fig = plt.figure()
     plt.ylabel(column1)
     plt.xlabel('Date') 
-    plt.xticks(x, d1)
-    plt.plot(d1, d2)
+    plt.plot(x, d2)
     plothtml2 = mpld3.fig_to_html(fig) # return for graph 
     # FINISH OF GRAPH
     # ------------------------------------------------------------------------

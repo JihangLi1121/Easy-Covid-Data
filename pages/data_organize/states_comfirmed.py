@@ -53,8 +53,7 @@ def States(state):
     # get the names before Population without the numbers 
     fiveBefore = df.loc[:,:'Population'] 
     # join fivedays of numbers to fiveBefore to create table
-    usefornum = fiveBefore.join(five_day) # used for daily num
-    fiveFinal = fiveBefore.join(five_day).drop(columns=['Province_State']).reset_index(drop=True) # return for table 
+    fiveFinal = fiveBefore.join(five_day).drop(columns=['Province_State']) # return for table 
     # FINISH OF TABLE 
     # ------------------------------------------------------------------------
     # START OF GRAPH
@@ -102,12 +101,12 @@ def States(state):
     # START OF DAILY NUMBER
     comfirm_num = 0
     # adding reports of today or yesterday's number from usefornum
-    for i in range(len(usefornum.index)):
+    for i in range(len(fiveFinal.index)):
         try:
-            temp = usefornum.loc[i, rightnow.strftime("%m/%d/%y")]
+            temp = fiveFinal.loc[i, rightnow.strftime("%m/%d/%y")]
         except KeyError:
             yesterday = rightnow - timedelta(days=1)
-            temp = usefornum.loc[i, yesterday.strftime("%m/%d/%y")]
+            temp = fiveFinal.loc[i, yesterday.strftime("%m/%d/%y")]
 
         comfirm_num = comfirm_num + temp # return for daily number of Comfirm
     # FINISH OF DAILY NUMBER

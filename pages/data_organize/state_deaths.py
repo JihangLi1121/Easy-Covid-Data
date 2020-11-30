@@ -53,7 +53,8 @@ def States(state):
     # get the names before Population without the numbers 
     fiveBefore = df.loc[:,:'Population']
     # join fivedays of numbers to fiveBefore to create table
-    fiveFinal = fiveBefore.join(five_day) # return for table 
+    usefornum = fiveBefore.join(five_day) # use for daily num 
+    fiveFinal = fiveBefore.join(five_day).drop(columns=['Province_State']).reset_index(drop=True) # return for table 
     # FINISH OF TABLE 
     # ------------------------------------------------------------------------
     # START OF GRAPH
@@ -83,7 +84,6 @@ def States(state):
     plt.xticks(x, d1)
     plt.plot(d1, d2)
     plothtml1 = mpld3.fig_to_html(fig) # return for graph 
-    print(plothtml1)
     # FINISH OF GRAPH
     # ------------------------------------------------------------------------
     # START OF TOTAL NUMBER OF DEATH
@@ -102,12 +102,12 @@ def States(state):
     # START OF DAILY NUMBER
     death_num = 0
     # adding reports of today or yesterday's number from fiveFinal
-    for i in range(len(fiveFinal.index)):
+    for i in range(len(usefornum.index)):
         try:
-            temp = fiveFinal.loc[i, rightnow.strftime("%m/%d/%y")]
+            temp = usefornum.loc[i, rightnow.strftime("%m/%d/%y")]
         except KeyError:
             yesterday = rightnow - timedelta(days=1)
-            temp = fiveFinal.loc[i, yesterday.strftime("%m/%d/%y")]
+            temp = usefornum.loc[i, yesterday.strftime("%m/%d/%y")]
 
         death_num = death_num + temp # return for daily number of Death
     # FINISH OF DAILY NUMBER

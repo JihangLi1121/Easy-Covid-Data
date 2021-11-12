@@ -17,12 +17,11 @@ def organize_df(df):
     population = pd.Series(get_population())
     df.insert(2,'Population',population)
     df2 = df
-    df2 = df2.drop(columns=['Admin2', 'Province_State'], axis=1)
+    df2.drop(columns=['Admin2', 'Province_State'], axis=1)
     for i in range(len(df.index)):
         if df.loc[i, 'Population'] == 0:
             df = df.drop(i, axis=0)
     df = df.reset_index(drop=True)
-    df = df.drop([3224])
     
     series = pd.Series(dtype=float)
 

@@ -24,7 +24,7 @@ def get_population():
 def organize_df(df):
     df = df.drop(columns=['UID', 'iso2', 'iso3', 'code3', 'FIPS', 'Lat', 'Long_','Country_Region','Combined_Key'], axis=1)
     df2 = df
-    df2 = df2.drop(columns=['Admin2', 'Province_State', 'Population'], axis=1)
+    df2.drop(columns=['Admin2', 'Province_State', 'Population'], axis=1)
     for i in range(len(df.index)):
         if df.loc[i, 'Population'] == 0:
             df = df.drop(i, axis=0)

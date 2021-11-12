@@ -32,6 +32,7 @@ def State(request):
     states = str(request.session['search']) # state in string
 
     print(f"{datetime.now().time()} Finish Get search result")
+    print("wtf")
     # get dicts
     deathDict = state_deaths.States(states)
     comfirmDict = states_comfirmed.States(states)

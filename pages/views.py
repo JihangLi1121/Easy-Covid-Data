@@ -72,6 +72,7 @@ def render_by_map(request, state):
     states = state # state in string
 
     print(f"{datetime.now().time()} Finish Get search result")
+    print("WTF")
     # get dicts
     deathDict = state_deaths.States(states)
     comfirmDict = states_comfirmed.States(states)
